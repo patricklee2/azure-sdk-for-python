@@ -81,6 +81,18 @@ class RouteType(Enum):
     static = "STATIC"
 
 
+class ManagedServiceIdentityType(Enum):
+
+    system_assigned = "SystemAssigned"
+    user_assigned = "UserAssigned"
+
+
+class IpFilterTag(Enum):
+
+    default = "Default"
+    xff_proxy = "XffProxy"
+
+
 class AutoHealActionType(Enum):
 
     recycle = "Recycle"
@@ -101,6 +113,19 @@ class ConnectionStringType(Enum):
     doc_db = "DocDb"
     redis_cache = "RedisCache"
     postgre_sql = "PostgreSQL"
+
+
+class AzureStorageType(Enum):
+
+    azure_files = "AzureFiles"
+    azure_blob = "AzureBlob"
+
+
+class AzureStorageState(Enum):
+
+    ok = "Ok"
+    invalid_credentials = "InvalidCredentials"
+    invalid_share = "InvalidShare"
 
 
 class ScmType(Enum):
@@ -140,6 +165,13 @@ class SupportedTlsVersions(Enum):
     one_full_stop_zero = "1.0"
     one_full_stop_one = "1.1"
     one_full_stop_two = "1.2"
+
+
+class FtpsState(Enum):
+
+    all_allowed = "AllAllowed"
+    ftps_only = "FtpsOnly"
+    disabled = "Disabled"
 
 
 class SslState(Enum):
@@ -254,13 +286,13 @@ class ComputeModeOptions(Enum):
 
 class WorkerSizeOptions(Enum):
 
-    default = "Default"
     small = "Small"
     medium = "Medium"
     large = "Large"
     d1 = "D1"
     d2 = "D2"
     d3 = "D3"
+    default = "Default"
 
 
 class AccessControlEntryAction(Enum):
@@ -295,6 +327,14 @@ class SolutionType(Enum):
     quick_solution = "QuickSolution"
     deep_investigation = "DeepInvestigation"
     best_practices = "BestPractices"
+
+
+class RenderingType(Enum):
+
+    no_graph = "NoGraph"
+    table = "Table"
+    time_series = "TimeSeries"
+    time_series_per_instance = "TimeSeriesPerInstance"
 
 
 class ResourceScopeType(Enum):
@@ -392,14 +432,6 @@ class FrequencyUnit(Enum):
     hour = "Hour"
 
 
-class BackupRestoreOperationType(Enum):
-
-    default = "Default"
-    clone = "Clone"
-    relocation = "Relocation"
-    snapshot = "Snapshot"
-
-
 class ContinuousWebJobStatus(Enum):
 
     initializing = "Initializing"
@@ -458,6 +490,15 @@ class PublicCertificateLocation(Enum):
     unknown = "Unknown"
 
 
+class BackupRestoreOperationType(Enum):
+
+    default = "Default"
+    clone = "Clone"
+    relocation = "Relocation"
+    snapshot = "Snapshot"
+    cloud_fs = "CloudFS"
+
+
 class UnauthenticatedClientAction(Enum):
 
     redirect_to_login_page = "RedirectToLoginPage"
@@ -500,6 +541,6 @@ class SkuName(Enum):
     basic = "Basic"
     standard = "Standard"
     premium = "Premium"
-    premium_v2 = "PremiumV2"
     dynamic = "Dynamic"
     isolated = "Isolated"
+    premium_v2 = "PremiumV2"

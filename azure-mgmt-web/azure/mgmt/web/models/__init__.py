@@ -25,10 +25,8 @@ from .vnet_route import VnetRoute
 from .vnet_info import VnetInfo
 from .vnet_gateway import VnetGateway
 from .user import User
-from .snapshot_recovery_target import SnapshotRecoveryTarget
-from .snapshot_recovery_request import SnapshotRecoveryRequest
+from .snapshot import Snapshot
 from .resource_metric_availability import ResourceMetricAvailability
-from .resource_metric_name import ResourceMetricName
 from .resource_metric_definition import ResourceMetricDefinition
 from .push_settings import PushSettings
 from .identifier import Identifier
@@ -57,6 +55,7 @@ from .virtual_application import VirtualApplication
 from .handler_mapping import HandlerMapping
 from .site_machine_key import SiteMachineKey
 from .conn_string_info import ConnStringInfo
+from .azure_storage_info_value import AzureStorageInfoValue
 from .name_value_pair import NameValuePair
 from .site_config import SiteConfig
 from .host_name_ssl_state import HostNameSslState
@@ -66,7 +65,11 @@ from .sku_capacity import SkuCapacity
 from .sku_description import SkuDescription
 from .app_service_plan import AppServicePlan
 from .resource import Resource
+from .default_error_response_error_details_item import DefaultErrorResponseErrorDetailsItem
+from .default_error_response_error import DefaultErrorResponseError
+from .default_error_response import DefaultErrorResponse, DefaultErrorResponseException
 from .name_identifier import NameIdentifier
+from .log_specification import LogSpecification
 from .metric_availability import MetricAvailability
 from .dimension import Dimension
 from .metric_specification import MetricSpecification
@@ -84,7 +87,6 @@ from .domain_control_center_sso_request import DomainControlCenterSsoRequest
 from .domain_ownership_identifier import DomainOwnershipIdentifier
 from .domain_patch_resource import DomainPatchResource
 from .domain_recommendation_search_parameters import DomainRecommendationSearchParameters
-from .error_response import ErrorResponse, ErrorResponseException
 from .tld_legal_agreement import TldLegalAgreement
 from .top_level_domain import TopLevelDomain
 from .top_level_domain_agreement_option import TopLevelDomainAgreementOption
@@ -98,13 +100,14 @@ from .network_access_control_entry import NetworkAccessControlEntry
 from .app_service_environment import AppServiceEnvironment
 from .localizable_string import LocalizableString
 from .csm_usage_quota import CsmUsageQuota
+from .deleted_site import DeletedSite
 from .error_entity import ErrorEntity
 from .operation import Operation
+from .resource_metric_name import ResourceMetricName
 from .resource_metric_property import ResourceMetricProperty
 from .resource_metric_value import ResourceMetricValue
 from .resource_metric import ResourceMetric
 from .web_app_collection import WebAppCollection
-from .deleted_site import DeletedSite
 from .solution import Solution
 from .detector_abnormal_time_period import DetectorAbnormalTimePeriod
 from .abnormal_time_period import AbnormalTimePeriod
@@ -115,6 +118,12 @@ from .data_source import DataSource
 from .response_meta_data import ResponseMetaData
 from .analysis_data import AnalysisData
 from .analysis_definition import AnalysisDefinition
+from .data_table_response_column import DataTableResponseColumn
+from .data_table_response_object import DataTableResponseObject
+from .detector_info import DetectorInfo
+from .rendering import Rendering
+from .diagnostic_data import DiagnosticData
+from .detector_response import DetectorResponse
 from .diagnostic_analysis import DiagnosticAnalysis
 from .diagnostic_category import DiagnosticCategory
 from .diagnostic_detector_response import DiagnosticDetectorResponse
@@ -123,6 +132,7 @@ from .stack_major_version import StackMajorVersion
 from .application_stack import ApplicationStack
 from .recommendation import Recommendation
 from .recommendation_rule import RecommendationRule
+from .billing_meter import BillingMeter
 from .csm_move_resource_envelope import CsmMoveResourceEnvelope
 from .geo_region import GeoRegion
 from .hosting_environment_deployment_info import HostingEnvironmentDeploymentInfo
@@ -144,6 +154,7 @@ from .azure_table_storage_application_logs_config import AzureTableStorageApplic
 from .azure_blob_storage_application_logs_config import AzureBlobStorageApplicationLogsConfig
 from .application_logs_config import ApplicationLogsConfig
 from .azure_blob_storage_http_logs_config import AzureBlobStorageHttpLogsConfig
+from .azure_storage_property_dictionary_resource import AzureStoragePropertyDictionaryResource
 from .database_backup_setting import DatabaseBackupSetting
 from .backup_item import BackupItem
 from .backup_schedule import BackupSchedule
@@ -154,6 +165,7 @@ from .continuous_web_job import ContinuousWebJob
 from .csm_publishing_profile_options import CsmPublishingProfileOptions
 from .csm_slot_entity import CsmSlotEntity
 from .custom_hostname_analysis_result import CustomHostnameAnalysisResult
+from .deleted_app_restore_request import DeletedAppRestoreRequest
 from .deployment import Deployment
 from .enabled_config import EnabledConfig
 from .file_system_http_logs_config import FileSystemHttpLogsConfig
@@ -173,12 +185,15 @@ from .perf_mon_sample import PerfMonSample
 from .perf_mon_set import PerfMonSet
 from .perf_mon_response import PerfMonResponse
 from .premier_add_on import PremierAddOn
+from .premier_add_on_patch_resource import PremierAddOnPatchResource
+from .private_access_subnet import PrivateAccessSubnet
+from .private_access_virtual_network import PrivateAccessVirtualNetwork
+from .private_access import PrivateAccess
 from .process_thread_info import ProcessThreadInfo
 from .process_module_info import ProcessModuleInfo
 from .process_info import ProcessInfo
 from .public_certificate import PublicCertificate
 from .restore_request import RestoreRequest
-from .restore_response import RestoreResponse
 from .site_auth_settings import SiteAuthSettings
 from .site_cloneability_criterion import SiteCloneabilityCriterion
 from .site_cloneability import SiteCloneability
@@ -192,10 +207,12 @@ from .site_php_error_log_flag import SitePhpErrorLogFlag
 from .site_source_control import SiteSourceControl
 from .slot_config_names_resource import SlotConfigNamesResource
 from .slot_difference import SlotDifference
-from .snapshot import Snapshot
+from .snapshot_recovery_source import SnapshotRecoverySource
+from .snapshot_restore_request import SnapshotRestoreRequest
 from .storage_migration_options import StorageMigrationOptions
 from .storage_migration_response import StorageMigrationResponse
 from .string_dictionary import StringDictionary
+from .swift_virtual_network import SwiftVirtualNetwork
 from .triggered_job_run import TriggeredJobRun
 from .triggered_job_history import TriggeredJobHistory
 from .triggered_web_job import TriggeredWebJob
@@ -221,11 +238,14 @@ from .top_level_domain_paged import TopLevelDomainPaged
 from .tld_legal_agreement_paged import TldLegalAgreementPaged
 from .certificate_paged import CertificatePaged
 from .deleted_site_paged import DeletedSitePaged
+from .detector_response_paged import DetectorResponsePaged
 from .diagnostic_category_paged import DiagnosticCategoryPaged
 from .analysis_definition_paged import AnalysisDefinitionPaged
 from .detector_definition_paged import DetectorDefinitionPaged
 from .application_stack_paged import ApplicationStackPaged
+from .recommendation_paged import RecommendationPaged
 from .source_control_paged import SourceControlPaged
+from .billing_meter_paged import BillingMeterPaged
 from .geo_region_paged import GeoRegionPaged
 from .identifier_paged import IdentifierPaged
 from .premier_add_on_offer_paged import PremierAddOnOfferPaged
@@ -267,12 +287,17 @@ from .web_site_management_client_enums import (
     CertificateOrderStatus,
     CertificateOrderActionType,
     RouteType,
+    ManagedServiceIdentityType,
+    IpFilterTag,
     AutoHealActionType,
     ConnectionStringType,
+    AzureStorageType,
+    AzureStorageState,
     ScmType,
     ManagedPipelineMode,
     SiteLoadBalancing,
     SupportedTlsVersions,
+    FtpsState,
     SslState,
     HostType,
     UsageState,
@@ -292,6 +317,7 @@ from .web_site_management_client_enums import (
     OperationStatus,
     IssueType,
     SolutionType,
+    RenderingType,
     ResourceScopeType,
     NotificationLevel,
     Channels,
@@ -303,7 +329,6 @@ from .web_site_management_client_enums import (
     BackupItemStatus,
     DatabaseType,
     FrequencyUnit,
-    BackupRestoreOperationType,
     ContinuousWebJobStatus,
     WebJobType,
     PublishingProfileFormat,
@@ -312,6 +337,7 @@ from .web_site_management_client_enums import (
     MSDeployProvisioningState,
     MySqlMigrationType,
     PublicCertificateLocation,
+    BackupRestoreOperationType,
     UnauthenticatedClientAction,
     BuiltInAuthenticationProvider,
     CloneAbilityResult,
@@ -337,10 +363,8 @@ __all__ = [
     'VnetInfo',
     'VnetGateway',
     'User',
-    'SnapshotRecoveryTarget',
-    'SnapshotRecoveryRequest',
+    'Snapshot',
     'ResourceMetricAvailability',
-    'ResourceMetricName',
     'ResourceMetricDefinition',
     'PushSettings',
     'Identifier',
@@ -369,6 +393,7 @@ __all__ = [
     'HandlerMapping',
     'SiteMachineKey',
     'ConnStringInfo',
+    'AzureStorageInfoValue',
     'NameValuePair',
     'SiteConfig',
     'HostNameSslState',
@@ -378,7 +403,11 @@ __all__ = [
     'SkuDescription',
     'AppServicePlan',
     'Resource',
+    'DefaultErrorResponseErrorDetailsItem',
+    'DefaultErrorResponseError',
+    'DefaultErrorResponse', 'DefaultErrorResponseException',
     'NameIdentifier',
+    'LogSpecification',
     'MetricAvailability',
     'Dimension',
     'MetricSpecification',
@@ -396,7 +425,6 @@ __all__ = [
     'DomainOwnershipIdentifier',
     'DomainPatchResource',
     'DomainRecommendationSearchParameters',
-    'ErrorResponse', 'ErrorResponseException',
     'TldLegalAgreement',
     'TopLevelDomain',
     'TopLevelDomainAgreementOption',
@@ -410,13 +438,14 @@ __all__ = [
     'AppServiceEnvironment',
     'LocalizableString',
     'CsmUsageQuota',
+    'DeletedSite',
     'ErrorEntity',
     'Operation',
+    'ResourceMetricName',
     'ResourceMetricProperty',
     'ResourceMetricValue',
     'ResourceMetric',
     'WebAppCollection',
-    'DeletedSite',
     'Solution',
     'DetectorAbnormalTimePeriod',
     'AbnormalTimePeriod',
@@ -427,6 +456,12 @@ __all__ = [
     'ResponseMetaData',
     'AnalysisData',
     'AnalysisDefinition',
+    'DataTableResponseColumn',
+    'DataTableResponseObject',
+    'DetectorInfo',
+    'Rendering',
+    'DiagnosticData',
+    'DetectorResponse',
     'DiagnosticAnalysis',
     'DiagnosticCategory',
     'DiagnosticDetectorResponse',
@@ -435,6 +470,7 @@ __all__ = [
     'ApplicationStack',
     'Recommendation',
     'RecommendationRule',
+    'BillingMeter',
     'CsmMoveResourceEnvelope',
     'GeoRegion',
     'HostingEnvironmentDeploymentInfo',
@@ -456,6 +492,7 @@ __all__ = [
     'AzureBlobStorageApplicationLogsConfig',
     'ApplicationLogsConfig',
     'AzureBlobStorageHttpLogsConfig',
+    'AzureStoragePropertyDictionaryResource',
     'DatabaseBackupSetting',
     'BackupItem',
     'BackupSchedule',
@@ -466,6 +503,7 @@ __all__ = [
     'CsmPublishingProfileOptions',
     'CsmSlotEntity',
     'CustomHostnameAnalysisResult',
+    'DeletedAppRestoreRequest',
     'Deployment',
     'EnabledConfig',
     'FileSystemHttpLogsConfig',
@@ -485,12 +523,15 @@ __all__ = [
     'PerfMonSet',
     'PerfMonResponse',
     'PremierAddOn',
+    'PremierAddOnPatchResource',
+    'PrivateAccessSubnet',
+    'PrivateAccessVirtualNetwork',
+    'PrivateAccess',
     'ProcessThreadInfo',
     'ProcessModuleInfo',
     'ProcessInfo',
     'PublicCertificate',
     'RestoreRequest',
-    'RestoreResponse',
     'SiteAuthSettings',
     'SiteCloneabilityCriterion',
     'SiteCloneability',
@@ -504,10 +545,12 @@ __all__ = [
     'SiteSourceControl',
     'SlotConfigNamesResource',
     'SlotDifference',
-    'Snapshot',
+    'SnapshotRecoverySource',
+    'SnapshotRestoreRequest',
     'StorageMigrationOptions',
     'StorageMigrationResponse',
     'StringDictionary',
+    'SwiftVirtualNetwork',
     'TriggeredJobRun',
     'TriggeredJobHistory',
     'TriggeredWebJob',
@@ -533,11 +576,14 @@ __all__ = [
     'TldLegalAgreementPaged',
     'CertificatePaged',
     'DeletedSitePaged',
+    'DetectorResponsePaged',
     'DiagnosticCategoryPaged',
     'AnalysisDefinitionPaged',
     'DetectorDefinitionPaged',
     'ApplicationStackPaged',
+    'RecommendationPaged',
     'SourceControlPaged',
+    'BillingMeterPaged',
     'GeoRegionPaged',
     'IdentifierPaged',
     'PremierAddOnOfferPaged',
@@ -578,12 +624,17 @@ __all__ = [
     'CertificateOrderStatus',
     'CertificateOrderActionType',
     'RouteType',
+    'ManagedServiceIdentityType',
+    'IpFilterTag',
     'AutoHealActionType',
     'ConnectionStringType',
+    'AzureStorageType',
+    'AzureStorageState',
     'ScmType',
     'ManagedPipelineMode',
     'SiteLoadBalancing',
     'SupportedTlsVersions',
+    'FtpsState',
     'SslState',
     'HostType',
     'UsageState',
@@ -603,6 +654,7 @@ __all__ = [
     'OperationStatus',
     'IssueType',
     'SolutionType',
+    'RenderingType',
     'ResourceScopeType',
     'NotificationLevel',
     'Channels',
@@ -614,7 +666,6 @@ __all__ = [
     'BackupItemStatus',
     'DatabaseType',
     'FrequencyUnit',
-    'BackupRestoreOperationType',
     'ContinuousWebJobStatus',
     'WebJobType',
     'PublishingProfileFormat',
@@ -623,6 +674,7 @@ __all__ = [
     'MSDeployProvisioningState',
     'MySqlMigrationType',
     'PublicCertificateLocation',
+    'BackupRestoreOperationType',
     'UnauthenticatedClientAction',
     'BuiltInAuthenticationProvider',
     'CloneAbilityResult',
